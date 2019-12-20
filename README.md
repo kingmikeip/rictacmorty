@@ -13,23 +13,24 @@
       combinations on the board contents after every move.
 
 ## How to get started
-1. Construct an `index.html` to be your starting point on this
+1. Read through all the directions. There's not a lot of guidance here, so you really need to understand what you're attempting to create. Whiteboard out a plan. Ask yourself what you need to make everything work together.
+2. Construct an `index.html` to be your starting point on this
    project. Add the necessary HTML tags, including `script` and
    `link` to link to JavaScript and CSS files respectively.
-2. Construct the gameboard. The gameboard page should include the 3x3 grid,
+3. Construct the gameboard. The gameboard page should include the 3x3 grid,
    and at minimum a reset button. Using `id` and `class` on clickable
    elements will help you wire this up in JavaScript afterwards.
-3. JavaScript portion will be next:
+4. JavaScript portion will be next:
 	* Locate the element first to use it within your app. Think about
      using `querySelector` to locate your target elements.
      Try this in your console to make sure your selection works.
 	* After finding the elements, start writing logic to listen for
       `click` events on those elements.
-	* You will also need a variable to keep track of moves. As this
-      will be used to indicate whether or not to draw an `X` or an `O`.
+	* You will also need a variable to keep track of moves. This
+      will be used to indicate whether or not to mark a square with an `X` or an `O`.
 
 ## Bonus
-* Display a message to indicate which turn is about to be played.
+* Display a message to indicate who's turn it is.
 * Keep score of how many games the player has won and lost.
 
 
