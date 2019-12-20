@@ -8,15 +8,14 @@
 * Every click will alternate between being for Player 1 or Player 2. The visual feedback should indicate whose turn it is.
 * A cell should not be able to be replayed once marked.
 * Add a reset button that will clear the contents of the board.
-* After the necessary moves have been played, stop game and alert the
-  winner if one player ends up winning with three in a row.
+* After the necessary moves have been played, stop game and alert the player to a win, loss or stalemate.
     * Hint: Determine a set of winning combinations. Check those
       combinations on the board contents after every move.
 
 ## How to get started
-1. Construct a `index.html` to be your starting point on this
-   project. Add your necessary HTML tags, including `script` and
-   `link` tags to link to your separate JavaScript and CSS files respectively.
+1. Construct an `index.html` to be your starting point on this
+   project. Add the necessary HTML tags, including `script` and
+   `link` to link to JavaScript and CSS files respectively.
 2. Construct the gameboard. The gameboard page should include the 3x3 grid,
    and at minimum a reset button. Using `id` and `class` on clickable
    elements will help you wire this up in JavaScript afterwards.
@@ -31,6 +30,7 @@
 
 ## Bonus
 * Display a message to indicate which turn is about to be played.
+* Keep score of how many games the player has won and lost.
 
 
 ## Ultra Bonus
@@ -38,6 +38,9 @@
   opponent. If you really need a challenge, write some code that will
   play a game of Tic Tac Toe against you. (Hint: look into the minimax
   algorithm).
+
+## CSS Bonus
+* Make the playing board into wooden playing table (or pick your own theme). Find a nice font to match.
 
 ## Starter code
 
