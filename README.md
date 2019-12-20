@@ -45,7 +45,7 @@
 
 ## Starter code
 
-There is no starter code provided for this lab.
+There is no starter code provided for this lab. 😈
 
 ## Deliverable
 
