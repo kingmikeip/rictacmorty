@@ -34,7 +34,7 @@
 * Keep score of how many games the player has won and lost.
 
 
-## Ultra Bonus
+## Winter Blizzard Break Bonus
 * We once had a student implement an Artifical Intelligence (AI)
   opponent. If you really need a challenge, write some code that will
   play a game of Tic Tac Toe against you. (Hint: look into the minimax
