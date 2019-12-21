@@ -1,0 +1,59 @@
+body{
+    margin: 0 auto;
+    width: 800px;
+    background: rgb(234,221,177);
+    font-family: Creepster;
+
+}
+
+h1{
+    text-align: center;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    height: 450px;
+    width: 440px;
+}
+
+div{
+    width: 140px;
+    height: 140px;
+    background: rgb(208,242,213);    
+    border: 1px solid black;
+    margin: 2px;
+}
+
+.player-1{
+    background-image: url(assets/rick.png);
+    width: 140px;
+    height: 140px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.player-2{
+    background-image: url(assets/morty.png);
+    width: 140px;
+    height: 140px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+
+/* Style
+Intro Sound: Show me what you got
+Rick Moves: wub a lubba, whatever, riggity wrecked, thank you
+
+Morty Moves: oh man, help, doing ok?, 
+
+Win: I like what you got
+
+Loss: Disqualified (vs Computer)
+
+Icon 1 -> Rick, Icon 2-> Morty
+*/
