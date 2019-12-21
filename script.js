@@ -22,7 +22,7 @@ function currentMove(){ // places current marker in box
         this.append(playerMorty);
         this.boxValue = 'Morty';
         document.getElementById('ohman').play();
-        checkWinner();
+        checkWinner(this.boxValue);
         boxCounter++;
         // console.log(boxCounter);
         this.hasClicked=true;
@@ -37,7 +37,7 @@ function currentMove(){ // places current marker in box
         this.boxValue = 'Rick';
         document.getElementById('wub').play();
         
-        checkWinner();
+        checkWinner(this.boxValue);
         boxCounter++;
         this.hasClicked=true;
         }
@@ -60,7 +60,7 @@ function nextTurn(){ //who goes next
     return !playerMove
 }
 
-function checkWinner(){ // function to check for a winner - hard coded for now
+function checkWinner(winner){ // function to check for a winner - hard coded for now
     if ((gameBoard[0].boxValue==gameBoard[1].boxValue&&gameBoard[1].boxValue==gameBoard[2].boxValue)||
        (gameBoard[3].boxValue==gameBoard[4].boxValue&&gameBoard[4].boxValue==gameBoard[5].boxValue)||
        (gameBoard[6].boxValue==gameBoard[7].boxValue&&gameBoard[7].boxValue==gameBoard[8].boxValue)||
@@ -69,7 +69,9 @@ function checkWinner(){ // function to check for a winner - hard coded for now
        (gameBoard[2].boxValue==gameBoard[5].boxValue&&gameBoard[5].boxValue==gameBoard[8].boxValue)||
        (gameBoard[0].boxValue==gameBoard[4].boxValue&&gameBoard[4].boxValue==gameBoard[8].boxValue)||
        (gameBoard[2].boxValue==gameBoard[4].boxValue&&gameBoard[4].boxValue==gameBoard[6].boxValue)){
-       document.getElementById('like').play();    
+        setTimeout(()=>{document.getElementById('like').play();},1000); 
+        setTimeout(()=>{confirm(`Player${winner} is the winner! Would you like to play again?`);}, 1500);
+           
        } else {
            console.log("no winner");
        }
@@ -81,7 +83,13 @@ function isEquals(val1, val2, val3){ // function to check 3 values, tbc...
 
 function gameIntro(){ // function to start game tbc
 
+    let gameStart = document.querySelector('main');
+    gameStart.style.display="flex";
+    let intro = document.querySelector('.introsplash');
+    intro.style.display = "none";
 }
+
+gameIntro();
 
 /* Intro Screen
  * Load Board
