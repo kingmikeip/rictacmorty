@@ -19,7 +19,7 @@ main{
     width: 440px;
 }
 
-div{
+.ticbox{
     width: 140px;
     height: 140px;
     background: rgb(208,242,213);    
@@ -47,13 +47,17 @@ div{
 
 /* Style
 Intro Sound: Show me what you got
-Rick Moves: wub a lubba, whatever, riggity wrecked, thank you
+Rick Moves: wub a lubba
 
-Morty Moves: oh man, help, doing ok?, 
+Morty Moves: oh man 
 
 Win: I like what you got
 
 Loss: Disqualified (vs Computer)
+
+Draw: whatever
+
+Trying to click on an already clicked box: help!, 
 
 Icon 1 -> Rick, Icon 2-> Morty
 */
