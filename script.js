@@ -81,20 +81,48 @@ function isEquals(val1, val2, val3){ // function to check 3 values, tbc...
 
 }
 
-function gameIntro(){ // function to start game tbc
-
-    let gameStart = document.querySelector('main');
-    gameStart.style.display="flex";
-    let intro = document.querySelector('.introsplash');
-    intro.style.display = "none";
+function gameSplash(){ // function to display splash
+    // show splash screen
+    // gameboard hidden
+    // player hits start
+    // cromulon shows up "show me what you got"
+    // splash disappears
+    // gameboard appears
+    // make better splash screen
+    let beginGame = document.querySelector("#startbutton");
+    beginGame.addEventListener('click', gameStart);
 }
 
-gameIntro();
+function gameStart(){ // show me what you got! (display cromulon increase size massively)
+    let gameStart = document.querySelector('main');
+    
+    let intro = document.querySelector('.introsplash');
+    
+
+    let visibleLoad = document.querySelector('#cromulonload');
+    let splashImg = document.querySelector('.introsplash');
+    splashImg.style.display = 'none';
+    visibleLoad.style.display = 'flex';
+    setTimeout(()=>{
+        visibleLoad.style.transform = "scale(20)";
+        visibleLoad.style.opacity = 0;
+        document.querySelector('#showme').play();
+    },500);
+    let bodyVar = document.querySelector("body");
+    gameStart.style.display="none";
+    setTimeout(()=>{
+        gameStart.style.display="flex"; // display flex makes gameboard appear
+        visibleLoad.remove();
+    },3000);
+}
+
+gameSplash();
 
 /* Intro Screen
  * Load Board
- * Player Move Randomized
+ * Initial Player Move Randomized
  * Check for Winner - winner logic
+ * Win or Draw - prompted for replay
  * Keep Score
  * 
  * winner logic: only 8 winning combinations (3 in a row)
