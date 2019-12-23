@@ -49,23 +49,31 @@ main{
 
 .introsplash{
     background: rgb(208,242,213,.5);
-    background-image: url(assets/splashscreen.jpg);
+    background-image: url(assets/splashscreen.png);
     background-size: cover;
     margin: 0 auto;
     height: 450px;
-    width: 440px;
+    width: 650px;
     display: fixed;
     text-align: center;
+    border: 4px groove white;
     /* Show Rick and Morty splash and begin button */
 }
 
 #startbutton{
-    background-color: rgb(255, 0, 0);
+    background-color: rgb(255,255,255,.5);
     width: 100px;
     height: 40px;
-    margin: 50% 43% 0;
-    
+    margin: 60% 43% 0;
+    font-size: 14px;
 }
+
+/* .titleimg{
+    background-image: url(assets/title.png);
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+} */
 
 #cromulonload{
     
@@ -73,10 +81,9 @@ main{
     background-size: cover;
     width: 50px;
     height: 50px;
-    margin: 0 auto;
-    display: flex;
+    margin: 30% auto;
+    display: none;
     transition: 3s ease-out;
-    
 }
 
 

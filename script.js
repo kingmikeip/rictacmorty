@@ -95,24 +95,19 @@ function gameSplash(){ // function to display splash
 
 function gameStart(){ // show me what you got! (display cromulon increase size massively)
     let gameStart = document.querySelector('main');
-    
-    let intro = document.querySelector('.introsplash');
-    
-
-    let visibleLoad = document.querySelector('#cromulonload');
+    let visibleLoad = document.querySelector('#cromulonload'); // loads cromulon
     let splashImg = document.querySelector('.introsplash');
-    splashImg.style.display = 'none';
-    visibleLoad.style.display = 'flex';
-    setTimeout(()=>{
+    splashImg.style.display = 'none'; // makes splash go away
+    visibleLoad.style.display = 'flex'; // makes cromulon visible
+    setTimeout(()=>{ // SHOW ME WHAT YOU GOT
         visibleLoad.style.transform = "scale(20)";
         visibleLoad.style.opacity = 0;
         document.querySelector('#showme').play();
     },500);
-    let bodyVar = document.querySelector("body");
-    gameStart.style.display="none";
+
     setTimeout(()=>{
         gameStart.style.display="flex"; // display flex makes gameboard appear
-        visibleLoad.remove();
+        visibleLoad.remove(); // deletes cromulon
     },3000);
 }
 
