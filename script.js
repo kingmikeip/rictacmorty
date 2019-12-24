@@ -4,7 +4,7 @@ let gameBoard = document.querySelectorAll('.ticbox'); // sets up the gameboard
 let playerMove = firstMove(); // determines whose turn it is false = p1, true = p2
 let boxCounter = 0; // checks to see if all boxes played
 let score = []; // score tracker currently unused
-
+let replay = false;
 
 gameBoard.forEach(element =>{ // adds click event listener
     element.addEventListener('click',currentMove);
@@ -44,7 +44,8 @@ function currentMove(){ // places current marker in box
     }
     
     if (boxCounter==9){
-        setTimeout(()=>{document.getElementById('whatever').play();}, 600);
+        setTimeout(()=>{document.getElementById('whatever').play();}, 1200);
+        setTimeout(()=>{confirm(`It's a draw! Would you like to play again?`);}, 1500);
          // it's a draw
     }
 
@@ -70,7 +71,12 @@ function checkWinner(winner){ // function to check for a winner - hard coded for
        (gameBoard[0].boxValue==gameBoard[4].boxValue&&gameBoard[4].boxValue==gameBoard[8].boxValue)||
        (gameBoard[2].boxValue==gameBoard[4].boxValue&&gameBoard[4].boxValue==gameBoard[6].boxValue)){
         setTimeout(()=>{document.getElementById('like').play();},1000); 
-        setTimeout(()=>{confirm(`Player${winner} is the winner! Would you like to play again?`);}, 1500);
+        setTimeout(()=>{replay = confirm(`Player${winner} is the winner! Would you like to play again?`);}, 2000); 
+        setTimeout(()=>{
+        if (replay){ // needs to get rid of time out for this to work
+            console.log('start new game');
+            location.reload(); // reloads the game
+        }}, 2000);
            
        } else {
            console.log("no winner");
@@ -78,7 +84,13 @@ function checkWinner(winner){ // function to check for a winner - hard coded for
 }
 
 function isEquals(val1, val2, val3){ // function to check 3 values, tbc...
-
+/**************
+ * 0 * 3 * 6 *
+ * 1 * 4 * 7 *
+ * 2 * 5 * 8 *
+ *************
+ * Every time a spot is played check the up/down, left/right, diagonal
+ */
 }
 
 function gameSplash(){ // function to display splash
