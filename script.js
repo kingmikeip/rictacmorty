@@ -1,3 +1,21 @@
+
+/* Intro Screen -> hit start -> player move determined -> cromulon ->
+ * Load Board
+ * Check for Winner - winner logic
+ * Win or Draw - prompted for replay
+ * Keep Score
+ * 
+ * winner logic: only 8 winning combinations (3 in a row)
+ * - 3 across [0,1,2], [3,4,5], [6,7,8]
+ * - 3 up and down [0,3,6], [1,4,7], [2,5,8]
+ * - 2 diagonal [0,4,8], [2,4,6]
+ * if all boxes filled - it's a draw
+ * */
+
+
+ // to add - initial and current move, score (used with local storage), AI/1p option
+
+
 // let playerRick; // player 1
 // let playerMorty; // player 2
 let gameBoard = document.querySelectorAll('.ticbox'); // sets up the gameboard
@@ -12,6 +30,10 @@ gameBoard.forEach(element =>{ // adds click event listener
     element.hasClicked = false;
 });
 
+gameSplash(); // game starts here
+// playerSelect();
+
+
 function currentMove(){ // places current marker in box
     if (playerMove){
         if (this.hasClicked){
@@ -22,8 +44,8 @@ function currentMove(){ // places current marker in box
         this.append(playerMorty);
         this.boxValue = 'Morty';
         document.getElementById('ohman').play();
-        checkWinner(this.boxValue);
         boxCounter++;
+        checkWinner(this.boxValue);
         // console.log(boxCounter);
         this.hasClicked=true;
         }
@@ -36,18 +58,17 @@ function currentMove(){ // places current marker in box
         this.append(playerRick);
         this.boxValue = 'Rick';
         document.getElementById('wub').play();
-        
-        checkWinner(this.boxValue);
         boxCounter++;
+        checkWinner(this.boxValue);
         this.hasClicked=true;
         }
     }
     
-    if (boxCounter==9){
-        setTimeout(()=>{document.getElementById('whatever').play();}, 1200);
-        setTimeout(()=>{confirm(`It's a draw! Would you like to play again?`);}, 1500);
-         // it's a draw
-    }
+    // if (boxCounter==9){
+    //     setTimeout(()=>{document.getElementById('whatever').play();}, 1200);
+    //     setTimeout(()=>{confirm(`It's a draw! Would you like to play again?`);}, 1500);
+    //      // it's a draw
+    // }
 
     playerMove = nextTurn(); // sets up next move
     // console.log(playerMove);
@@ -77,10 +98,19 @@ function checkWinner(winner){ // function to check for a winner - hard coded for
             console.log('start new game');
             location.reload(); // reloads the game
         }}, 2000);
-           
-       } else {
+
+       } else if (boxCounter==9){
+        setTimeout(()=>{document.getElementById('whatever').play();}, 1800);
+        setTimeout(()=>{replay = confirm(`It's a draw! Would you like to play again?`);}, 2000);
+         // it's a draw
+        setTimeout(()=>{
+            if (replay){ // needs to get rid of time out for this to work
+                console.log('start new game');
+                location.reload(); // reloads the game
+            }}, 2000);
+        } else {
            console.log("no winner");
-       }
+        }
 }
 
 function isEquals(val1, val2, val3){ // function to check 3 values, tbc...
@@ -101,14 +131,45 @@ function gameSplash(){ // function to display splash
     // splash disappears
     // gameboard appears
     // make better splash screen
-    let beginGame = document.querySelector("#startbutton");
-    beginGame.addEventListener('click', gameStart);
+    let beginGame = document.querySelector("#startbutton"); 
+    beginGame.addEventListener('click', playerSelect); // game start listener
 }
+
+function playerSelect(){ //visually shows players who goes first
+    
+    let splashImg = document.querySelector('.introsplash'); // splash screen
+    splashImg.style.display = 'none'; // makes splash go away
+    let showSelect = document.querySelector(".playerselect");
+    showSelect.style.display = "flex";
+
+    let selector = document.querySelector("#armselector");
+    let playerName;
+    if(firstMove()){
+        setTimeout(()=>{
+            selector.style.transform = 'rotate(20.40turn)'; // morty
+            playerName = 'Morty';
+        },500);
+    } else {
+        setTimeout(()=>{
+            selector.style.transform = 'rotate(20.85turn)'; // rick
+            playerName = 'Rick';
+        }, 500);
+    }
+    setTimeout(()=>{
+        let playerMove = document.querySelector('.playergoes');
+        let newPlayer = document.createElement('h3');
+        newPlayer.innerText = `Player${playerName} Goes First!`;
+        playerMove.append(newPlayer);
+    },3500)
+    
+}
+
+
 
 function gameStart(){ // show me what you got! (display cromulon increase size massively)
     let gameStart = document.querySelector('main');
     let visibleLoad = document.querySelector('#cromulonload'); // loads cromulon
-    let splashImg = document.querySelector('.introsplash');
+    let splashImg = document.querySelector('.introsplash'); // splash screen
     splashImg.style.display = 'none'; // makes splash go away
     visibleLoad.style.display = 'flex'; // makes cromulon visible
     setTimeout(()=>{ // SHOW ME WHAT YOU GOT
@@ -118,24 +179,11 @@ function gameStart(){ // show me what you got! (display cromulon increase size m
     },500);
 
     setTimeout(()=>{
-        gameStart.style.display="flex"; // display flex makes gameboard appear
         visibleLoad.remove(); // deletes cromulon
+        gameStart.style.display="flex"; // display flex makes gameboard appear
     },3000);
 }
 
-gameSplash();
 
-/* Intro Screen
- * Load Board
- * Initial Player Move Randomized
- * Check for Winner - winner logic
- * Win or Draw - prompted for replay
- * Keep Score
- * 
- * winner logic: only 8 winning combinations (3 in a row)
- * - 3 across [0,1,2], [3,4,5], [6,7,8]
- * - 3 up and down [0,3,6], [1,4,7], [2,5,8]
- * - 2 diagonal [0,4,8], [2,4,6]
- * if all boxes filled - it's a draw
- * */
+
 

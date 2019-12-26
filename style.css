@@ -87,6 +87,54 @@ main{
 }
 
 
+/* Player select screen CSS */
+
+.playerselect{
+    background: rgb(208,242,213,.5);
+    margin: 0 auto;
+    height: 450px;
+    width: 650px;
+    display: none;
+    border: 4px groove white;
+}
+
+.playerselect h3{
+    font-size: 30px;
+    margin: 10% auto;
+}
+
+.selector{
+    width: 150px;
+    height: 150px;
+    text-align: center;
+}
+
+.selectimages{
+    margin: 10% auto;
+    text-align: center;
+}
+
+#armselector{
+    transition: 3s ease-in-out;
+}
+
+.playergoes{
+    top: 20%;
+    margin: 0 auto;
+}
+
+#begin{
+    top: 10%;
+    margin: 0 auto;
+    text-align: center;
+    width: 100px;
+    height: 40px;
+    background: rgb(255,255,255,.5);
+    line-height: 40px;
+    border-radius: 5px;
+    display: none;
+}
+
 /* Style
 Intro Sound: Show me what you got
 Rick Moves: wub a lubba
