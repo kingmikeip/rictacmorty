@@ -23,6 +23,7 @@ let playerMove = firstMove(); // determines whose turn it is false = p1, true = 
 let boxCounter = 0; // checks to see if all boxes played
 let score = []; // score tracker currently unused
 let replay = false;
+let totalScores = getScores();
 
 gameBoard.forEach(element =>{ // adds click event listener
     element.addEventListener('click',currentMove);
@@ -91,8 +92,14 @@ function checkWinner(winner){ // function to check for a winner - hard coded for
        (gameBoard[2].boxValue==gameBoard[5].boxValue&&gameBoard[5].boxValue==gameBoard[8].boxValue)||
        (gameBoard[0].boxValue==gameBoard[4].boxValue&&gameBoard[4].boxValue==gameBoard[8].boxValue)||
        (gameBoard[2].boxValue==gameBoard[4].boxValue&&gameBoard[4].boxValue==gameBoard[6].boxValue)){
+        if(winner=='Rick'){ // updates scores
+            updateScores(1,0,1);
+        } else if(winner=='Morty'){
+            updateScores(0,1,1);
+        }
         setTimeout(()=>{document.getElementById('like').play();},1000); 
-        setTimeout(()=>{replay = confirm(`Player${winner} is the winner! Would you like to play again?`);}, 2000); 
+        setTimeout(()=>{replay = confirm(`Player${winner} is the winner!\n
+        After ${totalScores[2]} games, the score is Rick: ${totalScores[0]} Morty: ${totalScores[1]}\n Would you like to play again?`);}, 2000); 
         setTimeout(()=>{
         if (replay){ // needs to get rid of time out for this to work
             console.log('start new game');
@@ -102,6 +109,7 @@ function checkWinner(winner){ // function to check for a winner - hard coded for
        } else if (boxCounter==9){
         setTimeout(()=>{document.getElementById('whatever').play();}, 1800);
         setTimeout(()=>{replay = confirm(`It's a draw! Would you like to play again?`);}, 2000);
+        updateScores(0,0,1);
          // it's a draw
         setTimeout(()=>{
             if (replay){ // needs to get rid of time out for this to work
@@ -161,7 +169,13 @@ function playerSelect(){ //visually shows players who goes first
         newPlayer.innerText = `Player${playerName} Goes First!`;
         playerMove.append(newPlayer);
     },3500)
-    
+
+    setTimeout(()=>{
+        let beginButton = document.querySelector("#begin");
+        beginButton.addEventListener('click',gameStart);
+        beginButton.style.display = "inherit";
+    },3500)
+
 }
 
 
@@ -169,8 +183,10 @@ function playerSelect(){ //visually shows players who goes first
 function gameStart(){ // show me what you got! (display cromulon increase size massively)
     let gameStart = document.querySelector('main');
     let visibleLoad = document.querySelector('#cromulonload'); // loads cromulon
-    let splashImg = document.querySelector('.introsplash'); // splash screen
-    splashImg.style.display = 'none'; // makes splash go away
+    // let splashImg = document.querySelector('.introsplash'); // splash screen
+    // splashImg.style.display = 'none'; // makes splash go away
+    let playerSelectScreen = document.querySelector(".playerselect");
+    playerSelectScreen.style.display="none";
     visibleLoad.style.display = 'flex'; // makes cromulon visible
     setTimeout(()=>{ // SHOW ME WHAT YOU GOT
         visibleLoad.style.transform = "scale(20)";
@@ -184,6 +200,36 @@ function gameStart(){ // show me what you got! (display cromulon increase size m
     },3000);
 }
 
+function getScores(){ // keeps track of score locally
+    let scoreKeep = []; // 0 = rick, 1 = morty, 2 is total games
+    // window.localStorage.clear();
+    scoreKeep.push(parseInt(window.localStorage.getItem('rickScore')),
+                parseInt(window.localStorage.getItem('mortyScore')),
+                parseInt(window.localStorage.getItem('totalGames')));
+    console.log("scores1:", scoreKeep);
+    if (Number.isNaN(scoreKeep[2])){
+        window.localStorage.setItem('rickScore', '0');
+        window.localStorage.setItem('mortyScore', '0');
+        window.localStorage.setItem('totalGames', '0');
+        scoreKeep[0] = 0; // have to send as strings!
+        scoreKeep[1] = 0; // but store as numbers
+        scoreKeep[2] = 0;
+    }
+    console.log("scores2:", scoreKeep);
 
+    return scoreKeep; // returns array of historic scores
+}
+
+function updateScores(rick,morty,games){ //updates after every game
+    totalScores[0] += parseInt(rick); 
+    totalScores[1] += parseInt(morty); 
+    totalScores[2] += parseInt(games);
+
+    window.localStorage.setItem('rickScore', totalScores[0].toString());
+    window.localStorage.setItem('mortyScore', totalScores[1].toString());
+    window.localStorage.setItem('totalGames', totalScores[2].toString());
+
+    console.log(totalScores);
+}
 
 
