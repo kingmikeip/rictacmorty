@@ -261,3 +261,21 @@ function winningCombo(){ // function to check 3 values, tbc...
     }
     return false; // no winner
 }
+
+function playerVsComputer(){ // implements computer AI
+
+    /* each turn the AI will check if a winning combination is still possible
+
+    * if AI goes first, it will always pick the middle spot
+    * if AI goes second it will pick middle spot. And if already occupied, it will randomly choose
+    * each subsequent move it will also check if the player is within one move of winning and will prioritize blocking unless it can win that turn. --> check two in a row opponent or self. self has priority
+    * if two blocking or winning moves -> choose random between them as this is a guaranteed win or loss
+    * 
+    * when computer's turn to move it will simply add player-1 or player-2 class to the square it chooses
+    * then after a short delay allow the player to go
+    * 
+    * computer's avatar will be Morty for now. Will add more options later
+    * maybe different avatars will be smarter or dumber
+    
+    */
+}
