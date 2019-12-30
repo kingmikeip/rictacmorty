@@ -96,9 +96,9 @@ function currentMove(){ // places current marker in box - triggered by eventList
 
     playerMove = nextTurn(); // sets up next move
     
-    if (playerMove&&playerChoice=='oneplayer'){
+    if (playerMove&&playerChoice=='oneplayer'&&boxCounter!=9){
         console.log(`Box Counter: ${boxCounter}`)
-        setTimeout(computerMoves,1000);
+        setTimeout(computerMoves,2000);
         playerMove = nextTurn();
     }
 
@@ -426,8 +426,10 @@ function getMax(index){
             tempMax = val1;
         } else if (!gameBoard[val2].hasClicked){
             tempMax = val2;
-        } else {
+        } else if (!gameBoard[val3].hasClicked){
             tempMax = val3;
+        } else {
+            console.log("This row is full - select another row!!!");
         }
 
     }
@@ -438,14 +440,32 @@ function getMax(index){
 
 function computerMoves(){
     let compMove = getWeight();
+    // will return -1 if that row can't be played - pick another square if that's the case
     console.log(compMove);
+
+    if (compMove ==-1){
+        compMove = selectDiff(); // selects a different square
+    }
+
     let playerMorty = document.createElement('div');
     playerMorty.classList.add('player-2');
     gameBoard[compMove].append(playerMorty);
     gameBoard[compMove].boxValue = 'Morty';
-    // document.getElementById('ohman').play(); Maybe we don't need this for comp
+    document.getElementById('ohman').play(); //Maybe we don't need this for comp
     boxCounter++;
     checkWinner(gameBoard[compMove].boxValue);
     // console.log(boxCounter);
     gameBoard[compMove].hasClicked=true;
+}
+
+/********************************************************************************/
+
+function selectDiff(){ 
+    // randomly selects a different square (I know this isn't ideal) but it's a quick fix for now
+    // traverse the gameboard to find an unoccupied square 
+    for (let i = 0; i<gameBoard.length; i++){
+        if (gameBoard[i].hasClicked==false){
+            return i;
+        }
+    }
 }
