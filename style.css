@@ -73,9 +73,15 @@ main{
     background-color: rgb(255,255,255,.5);
     width: 100px;
     height: 40px;
-    margin: 60% 43% 0;
+    margin: 1% 43% 0;
     font-size: 14px;
 }
+
+/* 1p or 2p buttons to be implemented later  */
+.playerchoice{ 
+    margin: 58% 0 auto;
+}
+
 
 /* .titleimg{
     background-image: url(assets/title.png);
