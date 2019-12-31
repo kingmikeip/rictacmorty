@@ -368,9 +368,11 @@ function playerVsComputer(){ // implements computer AI
 
 /****************************************************************************************/
 
-function getWeight(){ // gets highest weight of a row
-    let tempIndex;
-    let tempWeight = 0;
+function getWeight(){ // gets highest (and lowest) weight of a row
+    let tempIndexMax;
+    let tempIndexMin; 
+    let tempWeightMax = 0;
+    let tempWeightMin = 7; // initialized as max weight
     boardWeight[0].totalWeight = sumWeight(0,1,2);
     boardWeight[1].totalWeight = sumWeight(3,4,5);
     boardWeight[2].totalWeight = sumWeight(6,7,8);
@@ -382,21 +384,29 @@ function getWeight(){ // gets highest weight of a row
 
     // console.log(boardWeight);
 
-    for (let i=0; i<boardWeight.length; i++){ // gets rows with highest weight
-        // console.log(boardWeight[i].totalWeight + " " + tempWeight );
+    for (let i=0; i<boardWeight.length; i++){ // gets rows with highest and lowest weight
 
-        if (boardWeight[i].totalWeight>tempWeight){
-            tempIndex = i;
-            tempWeight = boardWeight[i].totalWeight;
+        if (boardWeight[i].totalWeight>tempWeightMax){
+            tempIndexMax = i;
+            tempWeightMax = boardWeight[i].totalWeight;
+        }
+        if (boardWeight[i].totalWeight<tempWeightMin){
+            tempIndexMin = i;
+            tempWeightMin = boardWeight[i].totalWeight;
+            console.log(`Temp Weight Min ${tempWeightMin}, ${tempIndexMin}`);
         }
     }
+
+
     // tempIndex will store the row with highest value
 
     // console.log(`index ${tempIndex} weight ${tempWeight}`);
 
-    // next finds highest value in highest weight
-
-    return getMax(tempIndex); // finding max value in max weight row
+    // next finds highest value in highest and lowest weights
+    if (tempWeightMin<2){ // player has two in a row - block it!
+        return getMax(tempIndexMin);
+    }
+    return getMax(tempIndexMax); // finding max value in max weight row
 }
 
 /********************************************************************************/
@@ -465,9 +475,19 @@ function computerMoves(){
 function selectDiff(){ 
     // randomly selects a different square (I know this isn't ideal) but it's a quick fix for now
     // traverse the gameboard to find an unoccupied square 
-    for (let i = 0; i<gameBoard.length; i++){
-        if (gameBoard[i].hasClicked==false){
-            return i;
+    let x;
+    let foundBox=false;;
+    while(!foundBox){
+        x = Math.floor(Math.random()*9);
+        if (gameBoard[x].hasClicked==false){
+            foundBox=true;
         }
     }
+    return x;
+
+    // for (let i = 0; i<gameBoard.length; i++){
+    //     if (gameBoard[i].hasClicked==false){
+    //         return i;
+    //     }
+    // }
 }
