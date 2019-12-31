@@ -32,6 +32,7 @@ let replay = false;
 let totalScores = getScores(); // locally stored running scores
 let currentPlayer = document.getElementById('playerturn'); // current player's turn
 let playerChoice; // 1p or 2p
+let isWinner = false;
 
 let boardWeight = [
     {vals: [0,1,2]},
@@ -96,7 +97,7 @@ function currentMove(){ // places current marker in box - triggered by eventList
 
     playerMove = nextTurn(); // sets up next move
     
-    if (playerMove&&playerChoice=='oneplayer'&&boxCounter!=9){
+    if (playerMove&&playerChoice=='oneplayer'&&boxCounter!=9&&!isWinner){
         console.log(`Box Counter: ${boxCounter}`)
         setTimeout(computerMoves,2000);
         playerMove = nextTurn();
@@ -308,6 +309,7 @@ function winningCombo(){ // function to check 3 values, tbc...
        (gameBoard[0].boxValue==gameBoard[4].boxValue&&gameBoard[4].boxValue==gameBoard[8].boxValue)||
        (gameBoard[2].boxValue==gameBoard[4].boxValue&&gameBoard[4].boxValue==gameBoard[6].boxValue)){
         // checks for all winning combinations 
+        isWinner = true;
         return true;
     }
     return false; // no winner
